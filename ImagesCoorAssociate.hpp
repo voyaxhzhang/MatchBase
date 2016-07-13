@@ -212,7 +212,8 @@ public:
 			model = 0;
 			correct_ratio = 0.9f;
 		}
-		int left_num = update_transform_parameters(model, xl, yl, xr, yr, nBufferSpace, bBufferByte, match_idx, pairNum, bValid, err_dist);
+		int left_num = 0;
+		if(model != 0) left_num = update_transform_parameters(model, xl, yl, xr, yr, nBufferSpace, bBufferByte, match_idx, pairNum, bValid, err_dist);
 		
 		if (match_idx_tmp) delete[] match_idx_tmp;
 		if (bValidTmp) delete bValidTmp;

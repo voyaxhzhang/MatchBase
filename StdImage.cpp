@@ -21,7 +21,7 @@
 #include "GlobalUtil_AtMatch.h"
 
 #ifndef _NO_SIFT
-#include "SiftMatch.h"
+#include "../SiftMatch/SiftMatch.h"
 #endif
 
 #ifndef _NO_HARRIS
@@ -1438,11 +1438,11 @@ inline BOOL srtm_to_dem(double minLon, double minLat, double maxLon, double maxL
 	::CloseHandle(hFile);
 	delete[] pZ;
 
-	char config[256] = "";	readlink("/proc/self/exe", config, 256);	\
-		char* pS = strrchr(config, '.');	if (!pS) pS = config + strlen(config); strcpy(pS, ".ini");\
-		strcpy(exec_sift, config);	strcpy(exec_hrs, config);	\
-		pS = strrpath(exec_sift);	\
-		::GetPrivateProfileString("Exec", "sift", "SiftMatchEx/SiftMatchEx.exe", pS ? pS + 1 : exec_sift, 128, config);	\
+	char strCmd[2048] = "";	readlink("/proc/self/exe", strCmd, 256);
+	char* pS = strrchr(strCmd, '.');	if (!pS) pS = strCmd + strlen(strCmd); strcpy(pS, ".ini");
+	pS = strrpath(strCmd);	
+	::GetPrivateProfileString("Exec", "EgmCvt", "EgmCvt.exe", pS ? pS + 1 : strCmd, 128, strCmd);
+	sprintf(strCmd + strlen(strCmd), " -dem %s -Norm2Geo -outpath %s", lpstrDem, lpstrDem);
 
 	return TRUE;
 }

@@ -5,7 +5,7 @@
 
 #ifdef ATMATCH_CODE
 #include "StdImage.h"
-#include "MatchTask.hpp"
+//#include "MatchTask.hpp"
 #else
 #define IMAGEID_SIZE	10
 #define IMAGEID_BUFFER_SIZE	(IMAGEID_SIZE+1)
